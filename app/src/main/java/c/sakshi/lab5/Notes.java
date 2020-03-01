@@ -3,7 +3,9 @@ package c.sakshi.lab5;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,7 +23,7 @@ public class Notes extends AppCompatActivity {
 
         welcomeText = (TextView) findViewById(R.id.welcomeText);
         Intent intent = getIntent();
-        String username = intent.getStringExtra("name");
+        String username = intent.getStringExtra("username");
         welcomeText.setText("Welcome " + username + "!");
     }
 
@@ -34,9 +36,13 @@ public class Notes extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String usernameKey = "username";
         switch (item.getItemId()) {
             case R.id.logout:
                 Intent intent = new Intent(this, Login.class);
+                SharedPreferences sharedPreferences = getSharedPreferences("c.sakshi.lab5",
+                        Context.MODE_PRIVATE);
+                sharedPreferences.edit().remove("username").apply();
                 startActivity(intent);
                 return true;
             case R.id.addNote:
