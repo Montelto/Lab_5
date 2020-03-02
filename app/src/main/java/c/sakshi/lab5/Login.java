@@ -14,13 +14,13 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String usernmaeKey = "username";
+        String usernameKey = "username";
 
         SharedPreferences sharedPreferences = getSharedPreferences("c.sakshi.lab5",
                 Context.MODE_PRIVATE);
 
-        if (!sharedPreferences.getString(usernmaeKey, "").equals("")) {
-            String username = sharedPreferences.getString(usernmaeKey, "");
+        if (!sharedPreferences.getString(usernameKey, "").equals("")) {
+            String username = sharedPreferences.getString(usernameKey, "");
             goToNotes(username);
         } else {
             setContentView(R.layout.login_activity);
@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void goToNotes(String username) {
-        Intent intent = new Intent(this, Notes.class);
+        Intent intent = new Intent(this, NotesView.class);
         intent.putExtra("username", username);
         startActivity(intent);
     }
